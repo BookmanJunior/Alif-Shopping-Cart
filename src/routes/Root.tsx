@@ -5,7 +5,9 @@ export default function Root() {
   return (
     <>
       <Nav />
-      <Outlet />
+      <main className="max-w-main-width mx-auto">
+        <Outlet />
+      </main>
     </>
   );
 }
