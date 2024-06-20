@@ -5,10 +5,12 @@ export default function ErrorElement() {
 
   if (isRouteErrorResponse(error)) {
     return (
-      <main>
-        <h1>{error.status}</h1>
-        <h2>{error.statusText}</h2>
-        <Link to="/">Go Back</Link>
+      <main className="min-h-[100vh] grid place-content-center text-center gap-2">
+        <h1 className="text-3xl font-bold">{error.status}</h1>
+        <h2 className="text-xl font-bold">{error.statusText}</h2>
+        <Link className="button inline-block" to="/">
+          Go Back
+        </Link>
       </main>
     );
   }
