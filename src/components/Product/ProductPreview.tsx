@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Product } from "../Types/Product";
-import ProductPrice from "./Product/ProductPrice";
-import ProductButtons from "./Product/ProductButtons";
-import ProductImage from "./Product/ProductImage";
+import { Product } from "../../Types/Product";
+import ProductPrice from "./ProductPrice";
+import ProductButtons from "./ProductButtons";
+import ProductImage from "./ProductImage";
 
 export default function ProductPreview({ product }: { product: Product }) {
   return (
