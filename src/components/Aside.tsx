@@ -12,13 +12,18 @@ export default function Aside({ handleCategoryClick }: Aside) {
 
   return (
     <aside>
-      <form>
+      <form className="sticky top-16 w-[150px]">
         {categories?.map((category) => (
-          <label htmlFor={category} key={category}>
+          <label
+            id={category}
+            key={category}
+            className="flex gap-2 cursor-pointer"
+          >
             {category}
             <input
               type="checkbox"
               value={category}
+              className="order-[-1] accent-yellow-400 w-[18px] cursor-pointer"
               onClick={() => handleCategoryClick(category)}
             />
           </label>
