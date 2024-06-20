@@ -8,12 +8,37 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
-      state.push(action.payload);
+      const product = { ...action.payload };
+      product.quantity = 1;
+      state.push(product);
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
       return state.filter((product) => product.id !== action.payload);
     },
+    incrementProductQuantity: (state, action: PayloadAction<number>) => {
+      state.map((product) => {
+        if (product.id === action.payload && product.quantity) {
+          return (product.quantity += 1);
+        } else {
+          return product;
+        }
+      });
+    },
+    decrementProductQuantity: (state, action) => {
+      state.map((product) => {
+        if (product.id === action.payload && product.quantity) {
+          return (product.quantity -= 1);
+        } else {
+          return product;
+        }
+      });
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  incrementProductQuantity,
+  decrementProductQuantity,
+} = cartSlice.actions;
