@@ -5,7 +5,7 @@ export default function Root() {
   return (
     <>
       <Nav />
-      <main className="max-w-main-width mx-auto">
+      <main className="max-w-main-width mx-auto py-4">
         <Outlet />
       </main>
     </>
