@@ -5,7 +5,7 @@ export default function Nav() {
   const cartLength = useAppSelector((state) => state.cart.length);
 
   return (
-    <nav className="sticky top-0 border-b border-gray-400 bg-white border-opacity-20 z-10">
+    <nav className="sticky top-0 border-b border-gray-400 bg-white border-opacity-20 z-10 px-2">
       <div className="max-w-main-width mx-auto">
         <ul className="flex items-center gap-4 h-[60px]">
           <li>
