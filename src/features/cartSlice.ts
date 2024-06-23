@@ -24,7 +24,7 @@ export const cartSlice = createSlice({
         }
       });
     },
-    decrementProductQuantity: (state, action) => {
+    decrementProductQuantity: (state, action: PayloadAction<number>) => {
       state.map((product) => {
         if (product.id === action.payload && product.quantity) {
           return (product.quantity -= 1);
