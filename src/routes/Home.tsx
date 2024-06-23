@@ -17,7 +17,13 @@ export default function Home() {
 
   if (isLoading) return <Spinner />;
 
-  if (isError) return <div>{error.toString()}</div>;
+  if (isError) {
+    if ("error" in error) {
+      throw new Error(error.error);
+    } else {
+      throw new Error("Something went wrong.");
+    }
+  }
 
   let filteredProducts =
     categoriesFilter.length > 0
