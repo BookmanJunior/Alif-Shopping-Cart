@@ -10,7 +10,7 @@ import SortByPrice from "../components/SortByPriceForm";
 
 export default function Home() {
   const [categoriesFilter, setCategoriesFilter] = useState<string[]>([]);
-  const [sortByPrice, setSortByPrice] = useState<"" | "asc" | "desc">("");
+  const [priceFilter, setPriceFilter] = useState<"" | "asc" | "desc">("");
 
   const { data: products, isLoading, isError, error } = useGetProductsQuery();
   const { data: categories } = useGetCategoriesQuery();
@@ -26,9 +26,9 @@ export default function Home() {
         )
       : products;
 
-  if (sortByPrice && filteredProducts) {
+  if (priceFilter && filteredProducts) {
     filteredProducts = filteredProducts.slice().sort((a, b) => {
-      return sortByPrice === "asc" ? a.price - b.price : b.price - a.price;
+      return priceFilter === "asc" ? a.price - b.price : b.price - a.price;
     });
   }
 
@@ -58,7 +58,7 @@ export default function Home() {
 
   function handleSortByPrice(e: React.ChangeEvent<HTMLSelectElement>) {
     if (e.target.value === "asc" || e.target.value === "desc") {
-      setSortByPrice(e.target.value);
+      setPriceFilter(e.target.value);
     }
   }
 }
