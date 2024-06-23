@@ -8,6 +8,10 @@ export default function ErrorElement() {
       <ErrorBody errorStatus={error.status} errorText={error.statusText} />
     );
   }
+
+  if (error instanceof Error) {
+    return <ErrorBody errorText={error.message} />;
+  }
 }
 
 interface ErrorBody {
@@ -20,7 +24,7 @@ function ErrorBody({ errorStatus, errorText }: ErrorBody) {
     <main className="min-h-[100vh] grid place-content-center text-center gap-2">
       {errorStatus && <h1 className="text-3xl font-bold">{errorStatus}</h1>}
       <h2 className="text-xl font-bold">{errorText}</h2>
-      <Link className="button inline-block" to="/">
+      <Link className="button inline-block justify-self-center" to="/">
         Go Back
       </Link>
     </main>
