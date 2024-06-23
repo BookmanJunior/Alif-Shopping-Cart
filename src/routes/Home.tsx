@@ -1,4 +1,7 @@
-import { useGetProductsQuery } from "../features/apiSlice";
+import {
+  useGetCategoriesQuery,
+  useGetProductsQuery,
+} from "../features/apiSlice";
 import ProductPreview from "../components/Product/ProductPreview";
 import Aside from "../components/Aside";
 import Spinner from "../components/Spinner";
@@ -6,17 +9,21 @@ import { useState } from "react";
 import SortByPrice from "../components/SortByPriceForm";
 
 export default function Home() {
-  const { data: products, isLoading, isError, error } = useGetProductsQuery();
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categoriesFilter, setCategoriesFilter] = useState<string[]>([]);
   const [sortByPrice, setSortByPrice] = useState<"" | "asc" | "desc">("");
+
+  const { data: products, isLoading, isError, error } = useGetProductsQuery();
+  const { data: categories } = useGetCategoriesQuery();
 
   if (isLoading) return <Spinner />;
 
   if (isError) return <div>{error.toString()}</div>;
 
   let filteredProducts =
-    categories.length > 0
-      ? products?.filter((product) => categories.includes(product.category))
+    categoriesFilter.length > 0
+      ? products?.filter((product) =>
+          categoriesFilter.includes(product.category),
+        )
       : products;
 
   if (sortByPrice && filteredProducts) {
@@ -27,7 +34,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-wrap px-2">
-      <Aside handleCategoryClick={handleSetCategory} />
+      <Aside handleCategoryClick={handleSetCategory} categories={categories} />
       <section className="mx-auto">
         <SortByPrice handleOnChange={handleSortByPrice} />
         <div className="grid grid-cols-3 gap-4 my-2">
@@ -40,13 +47,13 @@ export default function Home() {
   );
 
   function handleSetCategory(category: string) {
-    if (categories.includes(category)) {
-      const updatedCategories = categories.filter((c) => c !== category);
-      setCategories(updatedCategories);
+    if (categoriesFilter.includes(category)) {
+      const updatedCategories = categoriesFilter.filter((c) => c !== category);
+      setCategoriesFilter(updatedCategories);
       return;
     }
 
-    setCategories([...categories, category]);
+    setCategoriesFilter([...categoriesFilter, category]);
   }
 
   function handleSortByPrice(e: React.ChangeEvent<HTMLSelectElement>) {
