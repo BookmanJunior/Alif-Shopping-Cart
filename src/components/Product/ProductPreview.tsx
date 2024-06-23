@@ -10,8 +10,8 @@ export default function ProductPreview({ product }: { product: Product }) {
       <Link to={`/product/${product.id}`} className="group">
         <ProductImage
           className="w-[150px] my-4"
-          productImage={product.image}
-          productTitle={product.title}
+          src={product.image}
+          alt={product.title}
         />
         <ProductPrice productPrice={product.price} />
         <p className="group-hover:text-yellow-400 max-w-[250px]">

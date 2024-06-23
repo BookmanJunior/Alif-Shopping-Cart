@@ -23,8 +23,8 @@ export default function ProductPage() {
     product && (
       <div className="flex gap-4 justify-center flex-wrap">
         <ProductImage
-          productImage={product.image}
-          productTitle={product.title}
+          src={product.image}
+          alt={product.title}
           className="w-[300px]"
         />
         <div className="max-w-[500px] flex flex-col gap-4">
