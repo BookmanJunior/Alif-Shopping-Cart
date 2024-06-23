@@ -17,13 +17,11 @@ export default function Home() {
   let filteredProducts =
     categories.length > 0
       ? products?.filter((product) => categories.includes(product.category))
-      : products?.slice();
+      : products;
 
-  if (sortByPrice) {
-    filteredProducts?.sort((a, b) => {
-      if (sortByPrice === "asc") return a.price - b.price;
-
-      return b.price - a.price;
+  if (sortByPrice && filteredProducts) {
+    filteredProducts = filteredProducts.slice().sort((a, b) => {
+      return sortByPrice === "asc" ? a.price - b.price : b.price - a.price;
     });
   }
 
