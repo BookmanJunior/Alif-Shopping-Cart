@@ -16,22 +16,22 @@ export const cartSlice = createSlice({
       return state.filter((product) => product.id !== action.payload);
     },
     incrementProductQuantity: (state, action: PayloadAction<number>) => {
-      state.map((product) => {
-        if (product.id === action.payload && product.quantity) {
-          return (product.quantity += 1);
-        } else {
-          return product;
-        }
-      });
+      const currentProduct = state.find(
+        (product) => product.id === action.payload,
+      );
+
+      if (currentProduct) {
+        currentProduct.quantity += 1;
+      }
     },
     decrementProductQuantity: (state, action: PayloadAction<number>) => {
-      state.map((product) => {
-        if (product.id === action.payload && product.quantity) {
-          return (product.quantity -= 1);
-        } else {
-          return product;
-        }
-      });
+      const currentProduct = state.find(
+        (product) => product.id === action.payload,
+      );
+
+      if (currentProduct) {
+        currentProduct.quantity -= 1;
+      }
     },
   },
 });
